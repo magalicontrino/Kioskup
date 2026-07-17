@@ -23,9 +23,7 @@ Extrait de trois fiches, pour juger sur pièces.
 -<div class="style-musical stylepageartistes">Musique</div>
 +<div class="style-musical stylepageartistes">musique</div>
 -<div class="text-block-24">Rappeur, Chanteur Afro, Interprète </div>
-+<div class="text-block-24">Rappeur
-+Chanteur Afro 
-+Interprète</div>
++<div class="text-block-24">Rappeur, Chanteur Afro, Interprète</div>
 -<a href="https://open.spotify.com/intl-fr/artist/27Z0KftsdWN4QPvQL9dbVs?si=UCjX9TgyTOuoHjNDcytZtQ" target="_blank" class="link-block-11 w-inline-block">
 +<a href="https://open.spotify.com/artist/27Z0KftsdWN4QPvQL9dbVs?si=TJkKgkCYTv6ArK8krqPbbg" target="_blank" class="link-block-11 w-inline-block">
 -<a href="#" class="link-block-11 w-inline-block w-condition-invisible">
