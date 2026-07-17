@@ -155,13 +155,16 @@ def maj_liens(t, f):
 
 
 def maj_bio(t, bio):
-    """La bio est du texte riche : chaque paragraphe devient un <p>."""
+    """La bio est du texte riche : chaque paragraphe devient un <p>.
+
+    Chaque fiche porte la bio deux fois — une version normale et une version
+    claire pour fond sombre. N'en réécrire qu'une les ferait diverger."""
     if not bio:
         return t
     corps = "".join(f"<p>{html.escape(p.strip())}</p>"
                     for p in re.split(r"\n\s*\n", bio) if p.strip())
-    return re.sub(r'(<div class="txt w-richtext">)(.*?)(</div>)',
-                  lambda m: m.group(1) + corps + m.group(3), t, count=1, flags=re.S)
+    return re.sub(r'(<div class="txt(?: white)? w-richtext">)(.*?)(</div>)',
+                  lambda m: m.group(1) + corps + m.group(3), t, flags=re.S)
 
 
 def aplatir(s):
