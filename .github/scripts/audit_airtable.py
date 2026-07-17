@@ -122,9 +122,29 @@ def main():
         else:
             sans_nom += 1
 
-    slugs = {slug(n): n for n in valides}
+    # Le slug déclaré fait foi ; on ne retombe sur le nom que s'il manque.
+    slugs = {}
+    for rec in records:
+        f = rec["fields"]
+        if not est_valide(f):
+            continue
+        nom = (f.get("Nom artiste") or "").strip()
+        if not nom:
+            continue
+        slugs[slug_declare(f) or slug(nom)] = nom
     manquants = {s: n for s, n in slugs.items() if s not in pages}
     orphelins = sorted(pages - set(slugs))
+
+    # Une page peut n'être rattachée à aucun « validé » sans être absente de la
+    # base : sa ligne existe et attend votre relecture. Confondre les deux
+    # ferait croire à une suppression imminente.
+    connus = {}
+    for rec in records:
+        s = slug_declare(rec["fields"])
+        if s:
+            connus[s] = statut(rec["fields"]) or "(vide)"
+    en_attente = [s for s in orphelins if s in connus]
+    absents = [s for s in orphelins if s not in connus]
 
     # Qualité des liens : ce qui produirait un lien mort sur la fiche.
     soucis = []
@@ -170,10 +190,20 @@ def main():
     for s, n in sorted(manquants.items(), key=lambda x: x[1].lower()):
         L.append(f"- {n} → `artistes/{s}.html`")
 
-    L += ["", f"## Fiches en ligne absentes de la base : {len(orphelins)}", ""]
-    L.append("⚠️ La génération les **supprimerait**." if orphelins else "_Aucune._")
-    for s in orphelins:
-        L.append(f"- `artistes/{s}.html`")
+    L += ["", f"## Pages sans ligne validée : {len(orphelins)}", ""]
+    if en_attente:
+        L += [f"**{len(en_attente)}** ont bien une ligne dans la base, en attente "
+              "de votre validation. Rien ne serait supprimé.", ""]
+        for s in en_attente[:12]:
+            L.append(f"- `{s}.html` — {connus[s]}")
+        if len(en_attente) > 12:
+            L.append(f"- … et {len(en_attente) - 12} autres")
+        L.append("")
+    if absents:
+        L += [f"⚠️ **{len(absents)}** n'ont **aucune ligne** dans la base :", ""]
+        L += [f"- `artistes/{s}.html`" for s in absents]
+    else:
+        L.append("✅ Toutes les pages du site ont une ligne dans la base.")
 
     # Contrôle de la colonne Slug : c'est elle qui fige les URLs. Une faute de
     # frappe y crée une page fantôme et laisse l'ancienne orpheline.
