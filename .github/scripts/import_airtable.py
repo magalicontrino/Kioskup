@@ -20,6 +20,8 @@ import pathlib
 import sys
 import traceback
 import urllib.error
+import re
+import unicodedata
 import urllib.parse
 import urllib.request
 
@@ -74,6 +76,15 @@ CHAMPS = [
     "Email", "web", "instagram", "Tik Tok", "youtube", "spotify",
     "Linkedin", "facebook", "soundcloud", "source couverture",
 ]
+
+# Nom du champ côté Airtable quand il diffère du nôtre. La colonne
+# « miniphrase de présentation » a été créée avec une espace initiale : l'API
+# est littérale et rejette tout le lot si le nom ne correspond pas au caractère
+# près.
+NOMS_AIRTABLE = {
+    "miniphrase de présentation": " miniphrase de présentation",
+}
+
 # `Genre` est une liste de choix : la valeur doit être un tableau.
 MULTI = {"Genre"}
 
@@ -111,9 +122,33 @@ def lire_base(token):
             return records
 
 
+GENRES_AIRTABLE = ["musique", "slam", "poésie", "danse", "stand up",
+                   "conte", "théâtre", "cirque"]
+
+
+def _forme(s):
+    """Rapproche « Stand-up » de « stand up » : minuscules, sans accent, et
+    tirets ramenés à des espaces."""
+    s = unicodedata.normalize("NFKD", s or "")
+    s = "".join(c for c in s if not unicodedata.combining(c))
+    return re.sub(r"[\s_-]+", " ", s).strip().lower()
+
+
+_INDEX = {_forme(g): g for g in GENRES_AIRTABLE}
+
+
 def valeur_genre(v):
-    """Le Genre du site est une chaîne (« Slam ») ; Airtable attend une liste."""
-    return [x.strip() for x in str(v).split(",") if x.strip()]
+    """Le Genre du site est une chaîne (« Slam ») ; Airtable attend une liste,
+    et n'accepte que les choix déjà définis — au caractère près. On rapproche
+    donc chaque valeur d'un choix existant, sans jamais en inventer."""
+    trouves, ignores = [], []
+    for brut in str(v).split(","):
+        brut = brut.strip()
+        if not brut:
+            continue
+        choix = _INDEX.get(_forme(brut))
+        (trouves if choix else ignores).append(choix or brut)
+    return trouves, ignores
 
 
 def main():
@@ -182,6 +217,7 @@ def main():
             erreurs.append(f"correction: {e.code} {e.read().decode('utf-8', 'replace')[:200]}")
 
     crees = 0
+    genres_ignores = []
     for i in range(0, len(a_creer), 10):
         lot = a_creer[i:i + 10]
         corps = {"records": []}
@@ -191,7 +227,15 @@ def main():
                 v = d.get(c)
                 if not v:
                     continue
-                f[c] = valeur_genre(v) if c in MULTI else v
+                if c in MULTI:
+                    ok, inconnus_g = valeur_genre(v)
+                    if inconnus_g:
+                        genres_ignores.append(f"{d.get('Nom artiste')} : {', '.join(inconnus_g)}")
+                    if not ok:
+                        continue
+                    f[NOMS_AIRTABLE.get(c, c)] = ok
+                else:
+                    f[NOMS_AIRTABLE.get(c, c)] = v
             f["slug"] = d["slug"]
             # Une création n'est jamais publiée d'office : c'est vous qui validez.
             f["Statut"] = ["À vérifier"]
@@ -205,6 +249,9 @@ def main():
     L += ["", "---", "", "## Résultat", "",
           f"- Slugs corrigés : **{faits}** / {len(corrections)}",
           f"- Artistes créés : **{crees}** / {len(a_creer)}"]
+    if genres_ignores:
+        L += ["", "### Genres non reconnus (champ laissé vide)", ""]
+        L += [f"- {g}" for g in genres_ignores]
     if erreurs:
         L += ["", "### Erreurs", ""] + [f"- `{e}`" for e in erreurs]
     ecrire_rapport(L)
