@@ -4,3 +4,5 @@
 # Publiés un par un sur le site, mais rassemblés ici ils forment une liste
 # directement exploitable par les collecteurs de spam. Reste en local.
 artistes-extraits.csv
+artistes-a-importer.csv
+slugs-existants.csv
