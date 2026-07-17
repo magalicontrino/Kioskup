@@ -30,6 +30,10 @@ Extrait de trois fiches, pour juger sur pièces.
 +<a href="https://hypeddit.com/wisenigg?fbclid=PAAab1h_pXKhzqg09ytwnCpgMj2CC9vuNUpw4fsazkGy_QpCynjMI9-de4F40_aem_AaYNYMWwlZZ6mOBZTbhcfe7SQzIidFuS8udfOOx5BKSAQT5
 -<p>Ayant grandi avec un père DJ, une mère chanteuse et un frère producteur et ingénieur du son, ce fut évident pour Wise de se tourner vers le monde artistique
 +<p>Ayant grandi avec un père DJ, une mère chanteuse et un frère producteur et ingénieur du son, ce fut évident pour Wise de se tourner vers le monde artistique
+-<p>Ayant grandi avec un père DJ, une mère chanteuse et un frère producteur et ingénieur du son, ce fut évident pour Wise de se tourner vers le monde artistique
++<p>Ayant grandi avec un père DJ, une mère chanteuse et un frère producteur et ingénieur du son, ce fut évident pour Wise de se tourner vers le monde artistique
+-<p>Ayant grandi avec un père DJ, une mère chanteuse et un frère producteur et ingénieur du son, ce fut évident pour Wise de se tourner vers le monde artistique
++<p>Ayant grandi avec un père DJ, une mère chanteuse et un frère producteur et ingénieur du son, ce fut évident pour Wise de se tourner vers le monde artistique
 ```
 
 ### `domy-bi.html`
