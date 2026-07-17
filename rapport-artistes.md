@@ -71,41 +71,42 @@ La génération **créerait** ces fiches.
 - `artistes/zoada.html`
 - `artistes/zouz.html`
 
-## Correspondance Airtable → site
+## Colonne Slug
 
-Noms tels que saisis dans la base, et page correspondante.
+- Renseignés : **31** / 31 validés
+- Sans slug : **0**
 
-- Agojie → `agojie.html`
-- ALCHEME → `alcheme.html`
-- Angatu Eleyê → `angatu-eleye.html`
-- Anna Winkin → `anna-winkin.html`
-- Camina Dance School → **aucune page**
-- Captain Frakas → **aucune page**
-- Cassiof → `cassiof.html`
-- Clémence en flammes → `clemence-en-flammes.html`
-- Comtesse Florette → `comtesse-florette.html`
-- Eric Lang / Easygoprod → **aucune page**
-- Fuego dance → `fuego-dance.html`
-- Gaélane → `gaelane.html`
-- Gerard Spencer → `gerard-spencer.html`
-- Hicham → `hicham.html`
-- JoBee Project → `jobee-project.html`
-- Johara → `johara.html`
-- Legoattini → **aucune page**
-- Marie Darah → `marie-darah.html`
-- Mike & Tenzen - Acoustic shamanic folk music project → **aucune page**
-- moonmood → `moonmood.html`
-- Nadjad → **aucune page**
-- Nina Morales → `nina-morales.html`
-- Nonante2 → **aucune page**
-- Nousssss → `nousssss.html`
-- Odile Poireau → **aucune page**
-- ramythologie → `ramythologie.html`
-- Rogine → `rogine.html`
-- Saint December → `saint-december.html`
-- Talip → `talip.html`
-- Trio Audelia → `trio-audelia.html`
-- WI$E NIGG → `wi-e-nigg.html`
+⚠️ **Slugs sans page correspondante** — faute de frappe, ou artiste jamais publié :
+
+- WI$E NIGG → `WI$E NIGG`
+- Legoattini → `Legoattini`
+- Agojie → `Agojie`
+- Captain Frakas → `Captain Frakas`
+- Comtesse Florette → `Comtesse Florette`
+- Clémence en flammes → `Clémence en flammes`
+- Nadjad → `Nadjad`
+- Gaélane → `Gaélane`
+- Mike & Tenzen - Acoustic shamanic folk music project → `Mike & Tenzen - Acoustic shamanic folk music project`
+- Marie Darah → `Marie Darah`
+- JoBee Project → `JoBeeProject`
+- Hicham → `Hicham`
+- Camina Dance School → `Camina Dance School`
+- Saint December → `Saint December`
+- Johara → `Johara`
+- Gerard Spencer → `Gerard Spencer`
+- Talip → `Talip`
+- Eric Lang / Easygoprod → `Eric Lang / Easygoprod`
+- Rogine → `Rogine`
+- Angatu Eleyê → `Angatu Eleyê`
+- Anna Winkin → `Anna Winkin`
+- Nonante2 → `Nonante2`
+- Cassiof → `Cassiof`
+- ALCHEME → `ALCHEME`
+- Odile Poireau → `Odile Poireau`
+- Nina Morales → `Nina Morales`
+- Nousssss → `Nousssss`
+- Fuego dance → `Fuego dance`
+- Trio Audelia → `Trio Audelia`
 
 ## Liens douteux : 11
 
