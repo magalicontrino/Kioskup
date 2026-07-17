@@ -67,6 +67,17 @@ def est_valide(fields):
     return sans_accent(statut(fields)) == "valide"
 
 
+def slug_declare(fields):
+    """Le slug saisi dans la base fait foi : il dit à quelle page publiée la
+    ligne correspond, indépendamment du nom. Une fiche dont le nom a changé
+    garde ainsi son adresse (Odile Poireau vit sous elodie-kempenaer)."""
+    for cle in ("Slug", "slug"):
+        v = fields.get(cle)
+        if isinstance(v, str) and v.strip():
+            return v.strip()
+    return ""
+
+
 def lire_base(token):
     records, offset = [], None
     while True:
@@ -164,15 +175,36 @@ def main():
     for s in orphelins:
         L.append(f"- `artistes/{s}.html`")
 
-    # Correspondance nom Airtable -> page du site. Sert à savoir quels artistes
-    # manquent réellement, pour ne leur livrer que ceux-là : une fusion
-    # écraserait leurs données Tally par celles, moins bonnes, du site.
-    L += ["", "## Correspondance Airtable → site", "",
-          "Noms tels que saisis dans la base, et page correspondante.", ""]
-    for n in sorted(valides, key=str.lower):
-        s = slug(n)
-        etat = f"`{s}.html`" if s in pages else "**aucune page**"
-        L.append(f"- {n} → {etat}")
+    # Contrôle de la colonne Slug : c'est elle qui fige les URLs. Une faute de
+    # frappe y crée une page fantôme et laisse l'ancienne orpheline.
+    saisis, vides, inconnus, doublons = {}, [], [], []
+    for rec in records:
+        f = rec["fields"]
+        if not est_valide(f):
+            continue
+        nom = (f.get("Nom artiste") or "?").strip() or "?"
+        s = slug_declare(f)
+        if not s:
+            vides.append(nom)
+            continue
+        if s in saisis:
+            doublons.append(f"{s} ({saisis[s]} et {nom})")
+        saisis[s] = nom
+        if s not in pages:
+            inconnus.append((nom, s))
+
+    L += ["", "## Colonne Slug", ""]
+    L.append(f"- Renseignés : **{len(saisis)}** / {len(valides)} validés")
+    L.append(f"- Sans slug : **{len(vides)}**" + (f" — {', '.join(vides)}" if vides else ""))
+    if doublons:
+        L += ["", "⚠️ **Slugs en double** — deux lignes viseraient la même page :", ""]
+        L += [f"- `{d}`" for d in doublons]
+    if inconnus:
+        L += ["", "⚠️ **Slugs sans page correspondante** — faute de frappe, "
+              "ou artiste jamais publié :", ""]
+        L += [f"- {n} → `{s}`" for n, s in inconnus]
+    if not doublons and not inconnus and not vides:
+        L.append("\n✅ Tous les slugs pointent vers une page existante.")
 
     L += ["", f"## Liens douteux : {len(soucis)}", ""]
     L.append("_Aucun._" if not soucis else "")
