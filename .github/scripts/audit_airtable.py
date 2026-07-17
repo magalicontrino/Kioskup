@@ -164,6 +164,16 @@ def main():
     for s in orphelins:
         L.append(f"- `artistes/{s}.html`")
 
+    # Correspondance nom Airtable -> page du site. Sert à savoir quels artistes
+    # manquent réellement, pour ne leur livrer que ceux-là : une fusion
+    # écraserait leurs données Tally par celles, moins bonnes, du site.
+    L += ["", "## Correspondance Airtable → site", "",
+          "Noms tels que saisis dans la base, et page correspondante.", ""]
+    for n in sorted(valides, key=str.lower):
+        s = slug(n)
+        etat = f"`{s}.html`" if s in pages else "**aucune page**"
+        L.append(f"- {n} → {etat}")
+
     L += ["", f"## Liens douteux : {len(soucis)}", ""]
     L.append("_Aucun._" if not soucis else "")
     for nom, champ, v, why in sorted(soucis):
