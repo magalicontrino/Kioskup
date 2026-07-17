@@ -54,6 +54,9 @@ Autres différences volontaires :
   pointent toujours vers leurs services d'origine.
 - **Google Fonts** (PT Serif, Montserrat, Merriweather, Changa One, Inter) reste chargé depuis
   Google, comme sur l'original.
-- Le formulaire de contact était géré par Webflow ; il s'affiche à l'identique mais n'a pas de
-  backend et n'envoie rien. Il faut le brancher sur un service (Formspree, Netlify Forms…) avant
-  toute mise en ligne.
+- **Formulaire de contact** — Webflow gérait la soumission depuis son backend. Faute d'équivalent
+  ici, « Envoyer » ouvre un brouillon pré-rempli dans le logiciel de mail du visiteur, à
+  destination de `kioskup.bxl@gmail.com` (voir `assets/js/contact-form.js`). L'apparence est celle
+  d'origine ; seul le texte de confirmation a été ajusté, puisque le message n'est pas envoyé tant
+  que le visiteur ne le fait pas lui-même. Pour un envoi direct sans logiciel de mail, il faudrait
+  brancher un service tiers (Formspree, Netlify Forms…).
