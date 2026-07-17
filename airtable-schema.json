@@ -1,0 +1,130 @@
+{
+  "bases": [
+    {
+      "nom": "artistes kioskup",
+      "id": "appUbHPkquG7bXSxJ",
+      "tables": [
+        {
+          "table": "formulaire tally",
+          "id": "tblvRWQHFtKwcfcpn",
+          "champs": [
+            {
+              "nom": "Nom",
+              "type": "singleLineText",
+              "choix": null
+            },
+            {
+              "nom": "Email",
+              "type": "email",
+              "choix": null
+            },
+            {
+              "nom": "Nom artiste",
+              "type": "singleLineText",
+              "choix": null
+            },
+            {
+              "nom": "Genre",
+              "type": "multipleSelects",
+              "choix": [
+                "musique",
+                "slam",
+                "poésie",
+                "danse",
+                "stand up",
+                "conte",
+                "théâtre",
+                "cirque"
+              ]
+            },
+            {
+              "nom": "style",
+              "type": "singleLineText",
+              "choix": null
+            },
+            {
+              "nom": " miniphrase de présentation",
+              "type": "multilineText",
+              "choix": null
+            },
+            {
+              "nom": "web",
+              "type": "url",
+              "choix": null
+            },
+            {
+              "nom": "instagram",
+              "type": "url",
+              "choix": null
+            },
+            {
+              "nom": "Tik Tok",
+              "type": "url",
+              "choix": null
+            },
+            {
+              "nom": "youtube",
+              "type": "url",
+              "choix": null
+            },
+            {
+              "nom": "spotify",
+              "type": "url",
+              "choix": null
+            },
+            {
+              "nom": "Linkedin",
+              "type": "url",
+              "choix": null
+            },
+            {
+              "nom": "facebook",
+              "type": "url",
+              "choix": null
+            },
+            {
+              "nom": "soundcloud",
+              "type": "url",
+              "choix": null
+            },
+            {
+              "nom": "video youtube ou autre",
+              "type": "url",
+              "choix": null
+            },
+            {
+              "nom": "bio",
+              "type": "multilineText",
+              "choix": null
+            },
+            {
+              "nom": "couverture",
+              "type": "multipleAttachments",
+              "choix": null
+            },
+            {
+              "nom": "avoir technique",
+              "type": "multilineText",
+              "choix": null
+            },
+            {
+              "nom": "besoin technique",
+              "type": "multilineText",
+              "choix": null
+            },
+            {
+              "nom": "source couverture",
+              "type": "singleLineText",
+              "choix": null
+            },
+            {
+              "nom": "commentaires perso",
+              "type": "multilineText",
+              "choix": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
