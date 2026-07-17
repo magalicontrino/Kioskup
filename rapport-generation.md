@@ -1,6 +1,6 @@
 # Génération des fiches
 
-Mode : **simulation — aucun fichier modifié**
+Mode : **ÉCRITURE**
 
 - Fiches validées traitées : **70**
 - Modifiées : **70**
@@ -118,7 +118,3 @@ Extrait de trois fiches, pour juger sur pièces.
 - `yomguy.html`
 - `zoada.html`
 - `zouz.html`
-
----
-
-Simulation. Relancer avec `ECRIRE=oui` pour appliquer.
