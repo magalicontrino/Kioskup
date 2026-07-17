@@ -2,41 +2,24 @@
 
 - Entrées dans la base : **71**
 - Fiches publiées sur le site : **70**
-- Validées exploitables : **30**
+- Validées exploitables : **70**
 
 ## Statuts (totaux)
 
-- À vérifier : **40**
-- Validé : **30**
+- Validé : **70**
 - Refusé : **1**
 
 ## Validés absents du site : 0
 
 _Aucun._
 
-## Pages sans ligne validée : 40
-
-**40** ont bien une ligne dans la base, en attente de votre validation. Rien ne serait supprimé.
-
-- `amu-les-griots.html` — À vérifier
-- `behind-the-pines.html` — À vérifier
-- `bunny-black-bones.html` — À vérifier
-- `chris-sand.html` — À vérifier
-- `coral-vados.html` — À vérifier
-- `dabeedin.html` — À vérifier
-- `daniel-helin.html` — À vérifier
-- `domy-bi.html` — À vérifier
-- `edaya.html` — À vérifier
-- `emma-pourcheron.html` — À vérifier
-- `eric-drabs.html` — À vérifier
-- `etienne-van-der-belen.html` — À vérifier
-- … et 28 autres
+## Pages sans ligne validée : 0
 
 ✅ Toutes les pages du site ont une ligne dans la base.
 
 ## Colonne Slug
 
-- Renseignés : **30** / 30 validés
+- Renseignés : **70** / 70 validés
 - Sans slug : **0**
 
 ✅ Tous les slugs pointent vers une page existante.
