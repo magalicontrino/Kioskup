@@ -71,6 +71,42 @@ La génération **créerait** ces fiches.
 - `artistes/zoada.html`
 - `artistes/zouz.html`
 
+## Correspondance Airtable → site
+
+Noms tels que saisis dans la base, et page correspondante.
+
+- Agojie → `agojie.html`
+- ALCHEME → `alcheme.html`
+- Angatu Eleyê → `angatu-eleye.html`
+- Anna Winkin → `anna-winkin.html`
+- Camina Dance School → **aucune page**
+- Captain Frakas → **aucune page**
+- Cassiof → `cassiof.html`
+- Clémence en flammes → `clemence-en-flammes.html`
+- Comtesse Florette → `comtesse-florette.html`
+- Eric Lang / Easygoprod → **aucune page**
+- Fuego dance → `fuego-dance.html`
+- Gaélane → `gaelane.html`
+- Gerard Spencer → `gerard-spencer.html`
+- Hicham → `hicham.html`
+- JoBee Project → `jobee-project.html`
+- Johara → `johara.html`
+- Legoattini → **aucune page**
+- Marie Darah → `marie-darah.html`
+- Mike & Tenzen - Acoustic shamanic folk music project → **aucune page**
+- moonmood → `moonmood.html`
+- Nadjad → **aucune page**
+- Nina Morales → `nina-morales.html`
+- Nonante2 → **aucune page**
+- Nousssss → `nousssss.html`
+- Odile Poireau → **aucune page**
+- ramythologie → `ramythologie.html`
+- Rogine → `rogine.html`
+- Saint December → `saint-december.html`
+- Talip → `talip.html`
+- Trio Audelia → `trio-audelia.html`
+- WI$E NIGG → `wi-e-nigg.html`
+
 ## Liens douteux : 11
 
 
