@@ -20,20 +20,18 @@ Extrait de trois fiches, pour juger sur pièces.
 ### `wi-e-nigg.html`
 
 ```diff
--<meta content="Rappeur, Chanteur Afro, Interprète" name="description"/>
-+<meta content="Rappeur
-+Chanteur Afro 
-+Interprète" name="description"/>
--<meta content="Rappeur, Chanteur Afro, Interprète" property="og:description"/>
-+<meta content="Rappeur
-+Chanteur Afro 
-+Interprète" property="og:description"/>
--<meta content="Rappeur, Chanteur Afro, Interprète" name="twitter:description"/>
-+<meta content="Rappeur
-+Chanteur Afro 
-+Interprète" name="twitter:description"/>
 -<div class="style-musical stylepageartistes">Musique</div>
 +<div class="style-musical stylepageartistes">musique</div>
+-<div class="text-block-24">Rappeur, Chanteur Afro, Interprète </div>
++<div class="text-block-24">Rappeur
++Chanteur Afro 
++Interprète</div>
+-<a href="https://open.spotify.com/intl-fr/artist/27Z0KftsdWN4QPvQL9dbVs?si=UCjX9TgyTOuoHjNDcytZtQ" target="_blank" class="link-block-11 w-inline-block">
++<a href="https://open.spotify.com/artist/27Z0KftsdWN4QPvQL9dbVs?si=TJkKgkCYTv6ArK8krqPbbg" target="_blank" class="link-block-11 w-inline-block">
+-<a href="#" class="link-block-11 w-inline-block w-condition-invisible">
++<a href="https://hypeddit.com/wisenigg?fbclid=PAAab1h_pXKhzqg09ytwnCpgMj2CC9vuNUpw4fsazkGy_QpCynjMI9-de4F40_aem_AaYNYMWwlZZ6mOBZTbhcfe7SQzIidFuS8udfOOx5BKSAQT5
+-<p>Ayant grandi avec un père DJ, une mère chanteuse et un frère producteur et ingénieur du son, ce fut évident pour Wise de se tourner vers le monde artistique
++<p>Ayant grandi avec un père DJ, une mère chanteuse et un frère producteur et ingénieur du son, ce fut évident pour Wise de se tourner vers le monde artistique
 ```
 
 ### `domy-bi.html`
