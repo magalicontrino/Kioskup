@@ -1,6 +1,6 @@
 # Import Airtable
 
-Mode : **simulation — rien ne sera modifié**
+Mode : **ÉCRITURE**
 
 - Lignes dans la base : **31**
 - Fiches publiées : **70**
@@ -53,4 +53,7 @@ Mode : **simulation — rien ne sera modifié**
 
 ---
 
-Simulation : aucune modification envoyée. Relancer avec `ECRIRE=oui` pour appliquer.
+## Résultat
+
+- Slugs corrigés : **0** / 0
+- Artistes créés : **40** / 40
