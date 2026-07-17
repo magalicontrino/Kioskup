@@ -10,6 +10,7 @@ on:
   push:
     paths:
       - .github/workflows/airtable-schema.yml
+      - .github/scripts/schema_airtable.py
 
 permissions:
   contents: write
