@@ -6,6 +6,46 @@ Mode : **simulation — aucun fichier modifié**
 - Modifiées : **70**
 - Déjà conformes : **0**
 
+## Aperçu des différences
+
+Extrait de trois fiches, pour juger sur pièces.
+
+### `bunny-black-bones.html`
+
+```diff
+-<div class="style-musical stylepageartistes">Musique</div>
++<div class="style-musical stylepageartistes">musique</div>
+```
+
+### `wi-e-nigg.html`
+
+```diff
+-<meta content="Rappeur, Chanteur Afro, Interprète" name="description"/>
++<meta content="Rappeur
++Chanteur Afro 
++Interprète" name="description"/>
+-<meta content="Rappeur, Chanteur Afro, Interprète" property="og:description"/>
++<meta content="Rappeur
++Chanteur Afro 
++Interprète" property="og:description"/>
+-<meta content="Rappeur, Chanteur Afro, Interprète" name="twitter:description"/>
++<meta content="Rappeur
++Chanteur Afro 
++Interprète" name="twitter:description"/>
+-<div class="style-musical stylepageartistes">Musique</div>
++<div class="style-musical stylepageartistes">musique</div>
+```
+
+### `domy-bi.html`
+
+```diff
+-<div class="style-musical stylepageartistes">Musique</div>
++<div class="style-musical stylepageartistes">musique</div>
+-<div class="text-block-24">Artiste multi polaire, une grande voix, Eclectic, autodidacte. </div>
++<div class="text-block-24">Artiste multi polaire, une grande voix, Eclectic, autodidacte.</div>
+```
+
+
 ## Fiches modifiées
 
 - `agojie.html`
