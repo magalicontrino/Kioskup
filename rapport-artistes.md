@@ -1,112 +1,45 @@
 # Audit Airtable / site
 
-- Entrées dans la base : **31**
+- Entrées dans la base : **71**
 - Fiches publiées sur le site : **70**
-- Validées exploitables : **31**
+- Validées exploitables : **30**
 
 ## Statuts (totaux)
 
-- Validé : **31**
+- À vérifier : **40**
+- Validé : **30**
+- Refusé : **1**
 
-## Validés absents du site : 8
+## Validés absents du site : 0
 
-La génération **créerait** ces fiches.
-- Camina Dance School → `artistes/camina-dance-school.html`
-- Captain Frakas → `artistes/captain-frakas.html`
-- Eric Lang / Easygoprod → `artistes/eric-lang-easygoprod.html`
-- Legoattini → `artistes/legoattini.html`
-- Mike & Tenzen - Acoustic shamanic folk music project → `artistes/mike-tenzen-acoustic-shamanic-folk-music-project.html`
-- Nadjad → `artistes/nadjad.html`
-- Nonante2 → `artistes/nonante2.html`
-- Odile Poireau → `artistes/odile-poireau.html`
+_Aucun._
 
-## Fiches en ligne absentes de la base : 47
+## Pages sans ligne validée : 40
 
-⚠️ La génération les **supprimerait**.
-- `artistes/amu-les-griots.html`
-- `artistes/behind-the-pines.html`
-- `artistes/bunny-black-bones.html`
-- `artistes/camina.html`
-- `artistes/captaine-frakas.html`
-- `artistes/chris-sand.html`
-- `artistes/coral-vados.html`
-- `artistes/dabeedin.html`
-- `artistes/daniel-helin.html`
-- `artistes/domy-bi.html`
-- `artistes/edaya.html`
-- `artistes/elodie-kempenaer.html`
-- `artistes/emma-pourcheron.html`
-- `artistes/eric-drabs.html`
-- `artistes/eric-lang.html`
-- `artistes/etienne-van-der-belen.html`
-- `artistes/fojumo.html`
-- `artistes/gueules-de-loups.html`
-- `artistes/huguette-izobimpa.html`
-- `artistes/isasu-kazirr.html`
-- `artistes/jessica-lefebvre.html`
-- `artistes/jupiter-diop.html`
-- `artistes/kin-d-qozovar.html`
-- `artistes/layla-nabulsi.html`
-- `artistes/lola.html`
-- `artistes/mamemo.html`
-- `artistes/marc-van-eyck.html`
-- `artistes/matthieu-ha.html`
-- `artistes/mike-tenzen.html`
-- `artistes/nadjad-bacar-2.html`
-- `artistes/nonante-2.html`
-- `artistes/olivia-auclair.html`
-- `artistes/olivier-verlynde.html`
-- `artistes/pie-tshibanda.html`
-- `artistes/projet-sunflower.html`
-- `artistes/queen-astrid.html`
-- `artistes/romain-scurra.html`
-- `artistes/sibel-duo.html`
-- `artistes/syn.html`
-- `artistes/tango-factory.html`
-- `artistes/timmy-otool.html`
-- `artistes/tribal-mambo-spirit.html`
-- `artistes/tribut-jazz-group.html`
-- `artistes/trio-kaleidoscope.html`
-- `artistes/yomguy.html`
-- `artistes/zoada.html`
-- `artistes/zouz.html`
+**40** ont bien une ligne dans la base, en attente de votre validation. Rien ne serait supprimé.
+
+- `amu-les-griots.html` — À vérifier
+- `behind-the-pines.html` — À vérifier
+- `bunny-black-bones.html` — À vérifier
+- `chris-sand.html` — À vérifier
+- `coral-vados.html` — À vérifier
+- `dabeedin.html` — À vérifier
+- `daniel-helin.html` — À vérifier
+- `domy-bi.html` — À vérifier
+- `edaya.html` — À vérifier
+- `emma-pourcheron.html` — À vérifier
+- `eric-drabs.html` — À vérifier
+- `etienne-van-der-belen.html` — À vérifier
+- … et 28 autres
+
+✅ Toutes les pages du site ont une ligne dans la base.
 
 ## Colonne Slug
 
-- Renseignés : **31** / 31 validés
+- Renseignés : **30** / 30 validés
 - Sans slug : **0**
 
-⚠️ **Slugs sans page correspondante** — faute de frappe, ou artiste jamais publié :
-
-- WI$E NIGG → `WI$E NIGG`
-- Legoattini → `Legoattini`
-- Agojie → `Agojie`
-- Captain Frakas → `Captain Frakas`
-- Comtesse Florette → `Comtesse Florette`
-- Clémence en flammes → `Clémence en flammes`
-- Nadjad → `Nadjad`
-- Gaélane → `Gaélane`
-- Mike & Tenzen - Acoustic shamanic folk music project → `Mike & Tenzen - Acoustic shamanic folk music project`
-- Marie Darah → `Marie Darah`
-- JoBee Project → `JoBeeProject`
-- Hicham → `Hicham`
-- Camina Dance School → `Camina Dance School`
-- Saint December → `Saint December`
-- Johara → `Johara`
-- Gerard Spencer → `Gerard Spencer`
-- Talip → `Talip`
-- Eric Lang / Easygoprod → `Eric Lang / Easygoprod`
-- Rogine → `Rogine`
-- Angatu Eleyê → `Angatu Eleyê`
-- Anna Winkin → `Anna Winkin`
-- Nonante2 → `Nonante2`
-- Cassiof → `Cassiof`
-- ALCHEME → `ALCHEME`
-- Odile Poireau → `Odile Poireau`
-- Nina Morales → `Nina Morales`
-- Nousssss → `Nousssss`
-- Fuego dance → `Fuego dance`
-- Trio Audelia → `Trio Audelia`
+✅ Tous les slugs pointent vers une page existante.
 
 ## Liens douteux : 11
 
