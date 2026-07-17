@@ -1,0 +1,44 @@
+# Complète la base Airtable : corrige les slugs, ajoute les artistes absents.
+#
+# Simulation par défaut. L'écriture ne part que sur un déclenchement manuel
+# explicite : un push ne peut pas modifier la base par inadvertance.
+name: Import Airtable
+
+on:
+  workflow_dispatch:
+    inputs:
+      ecrire:
+        description: 'Écrire réellement dans Airtable ? ("oui" pour appliquer)'
+        required: true
+        default: "non"
+  push:
+    paths:
+      - .github/workflows/airtable-import.yml
+      - .github/scripts/import_airtable.py
+      - .github/scripts/extraction.py
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Importer
+        env:
+          AIRTABLE_WRITE_TOKEN: ${{ secrets.AIRTABLE_WRITE_TOKEN }}
+          # Un push reste toujours en simulation.
+          ECRIRE: ${{ github.event_name == 'workflow_dispatch' && inputs.ecrire || 'non' }}
+        run: python3 .github/scripts/import_airtable.py
+
+      - name: Committer le rapport
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase --autostash -q || true
+          git add rapport-import.md || true
+          git diff --staged --quiet || git commit -m "Rapport d'import Airtable"
+          git push || true
