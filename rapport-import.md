@@ -1,6 +1,6 @@
 # Import Airtable
 
-Mode : **simulation — rien ne sera modifié**
+Mode : **ÉCRITURE**
 
 - Lignes dans la base : **31**
 - Fiches publiées : **70**
@@ -81,4 +81,14 @@ Mode : **simulation — rien ne sera modifié**
 
 ---
 
-Simulation : aucune modification envoyée. Relancer avec `ECRIRE=oui` pour appliquer.
+## Résultat
+
+- Slugs corrigés : **28** / 28
+- Artistes créés : **0** / 40
+
+### Erreurs
+
+- `création: 422 {"error":{"type":"UNKNOWN_FIELD_NAME","message":"Unknown field name: \"miniphrase de présentation\""}}`
+- `création: 422 {"error":{"type":"UNKNOWN_FIELD_NAME","message":"Unknown field name: \"miniphrase de présentation\""}}`
+- `création: 422 {"error":{"type":"UNKNOWN_FIELD_NAME","message":"Unknown field name: \"miniphrase de présentation\""}}`
+- `création: 422 {"error":{"type":"UNKNOWN_FIELD_NAME","message":"Unknown field name: \"miniphrase de présentation\""}}`
