@@ -27,114 +27,13 @@ jobs:
       - name: Comparer
         env:
           AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN }}
-        run: |
-          python3 - <<'PY'
-          import json, os, pathlib, re, unicodedata, urllib.parse, urllib.request
-
-          TOKEN = os.environ.get("AIRTABLE_TOKEN")
-          if not TOKEN:
-              raise SystemExit("Secret AIRTABLE_TOKEN absent.")
-
-          BASE = "appUbHPkquG7bXSxJ"
-          TABLE = "tblvRWQHFtKwcfcpn"
-
-          def slug(s: str) -> str:
-              """Reproduit la forme des URLs Webflow : sans accent, en minuscules."""
-              s = unicodedata.normalize("NFKD", s or "")
-              s = "".join(c for c in s if not unicodedata.combining(c))
-              s = re.sub(r"[^a-zA-Z0-9]+", "-", s).strip("-").lower()
-              return s
-
-          # --- Lecture de la base (paginée) ---
-          records, offset = [], None
-          while True:
-              url = f"https://api.airtable.com/v0/{BASE}/{TABLE}?pageSize=100"
-              if offset:
-                  url += "&offset=" + urllib.parse.quote(offset)
-              req = urllib.request.Request(url, headers={"Authorization": f"Bearer {TOKEN}"})
-              with urllib.request.urlopen(req, timeout=30) as r:
-                  data = json.load(r)
-              records += data.get("records", [])
-              offset = data.get("offset")
-              if not offset:
-                  break
-
-          # --- Statuts (totaux uniquement) ---
-          statuts = {}
-          for rec in records:
-              v = rec["fields"].get("Statut") or "(vide)"
-              statuts[v] = statuts.get(v, 0) + 1
-
-          # --- Correspondance avec les fiches publiées ---
-          pages = {p.stem for p in pathlib.Path("artistes").glob("*.html")}
-
-          valides = []
-          sans_nom = 0
-          for rec in records:
-              f = rec["fields"]
-              if f.get("Statut") != "Validé":
-                  continue
-              nom = (f.get("Nom artiste") or "").strip()
-              if not nom:
-                  sans_nom += 1
-                  continue
-              valides.append(nom)
-
-          slugs_airtable = {slug(n): n for n in valides}
-          manquants = {s: n for s, n in slugs_airtable.items() if s not in pages}
-          orphelins = sorted(pages - set(slugs_airtable))
-
-          # --- Qualité des liens ---
-          URLS = ["web", "instagram", "Tik Tok", "youtube", "spotify",
-                  "Linkedin", "facebook", "soundcloud", "video youtube ou autre"]
-          soucis = []
-          for rec in records:
-              f = rec["fields"]
-              if f.get("Statut") != "Validé":
-                  continue
-              nom = (f.get("Nom artiste") or "?").strip()
-              for champ in URLS:
-                  v = (f.get(champ) or "").strip()
-                  if not v:
-                      continue
-                  if v.startswith("@") or not re.match(r"^https?://", v):
-                      soucis.append((nom, champ, v, "pas une URL complète"))
-                  elif re.match(r"^https?://(www\.)?[^/]+/?$", v) and champ != "web":
-                      soucis.append((nom, champ, v, "pointe vers l'accueil, pas un profil"))
-
-          # --- Rapport ---
-          L = []
-          L.append("# Audit Airtable / site\n")
-          L.append(f"- Entrées dans la base : **{len(records)}**")
-          L.append(f"- Fiches publiées sur le site : **{len(pages)}**\n")
-          L.append("## Statuts (totaux)\n")
-          for k, v in sorted(statuts.items(), key=lambda x: -x[1]):
-              L.append(f"- {k} : **{v}**")
-          if sans_nom:
-              L.append(f"\n⚠️ **{sans_nom}** entrée(s) validée(s) sans « Nom artiste » — impossible de générer une fiche.")
-
-          L.append(f"\n## Validés absents du site : {len(manquants)}\n")
-          L.append("La génération **créerait** ces fiches.\n" if manquants else "_Aucun._\n")
-          for s, n in sorted(manquants.items(), key=lambda x: x[1]):
-              L.append(f"- {n}  → `artistes/{s}.html`")
-
-          L.append(f"\n## Fiches en ligne absentes de la base : {len(orphelins)}\n")
-          L.append("⚠️ La génération les **supprimerait**.\n" if orphelins else "_Aucune._\n")
-          for s in orphelins:
-              L.append(f"- `artistes/{s}.html`")
-
-          L.append(f"\n## Liens douteux : {len(soucis)}\n")
-          for nom, champ, v, why in soucis:
-              L.append(f"- **{nom}** / {champ} : `{v}` — {why}")
-
-          pathlib.Path("rapport-artistes.md").write_text("\n".join(L) + "\n", encoding="utf-8")
-          print("\n".join(L))
-          PY
+        run: python3 .github/scripts/audit_airtable.py
 
       - name: Committer le rapport
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add rapport-artistes.md
+          git add rapport-artistes.md || true
           git diff --staged --quiet || git commit -m "Auditer la correspondance Airtable / fiches publiées"
-          git push
+          git push || true
