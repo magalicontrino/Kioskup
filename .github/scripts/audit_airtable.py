@@ -46,6 +46,19 @@ def slug(s):
     return re.sub(r"[^a-zA-Z0-9]+", "-", s).strip("-").lower()
 
 
+def statut(fields):
+    """Le champ Statut peut être un choix simple (chaîne) ou multiple (liste)
+    selon la façon dont la colonne a été créée : on accepte les deux."""
+    v = fields.get("Statut")
+    if isinstance(v, list):
+        return v[0].strip() if v else ""
+    return (v or "").strip()
+
+
+def est_valide(fields):
+    return statut(fields).lower() == "validé"
+
+
 def lire_base(token):
     records, offset = [], None
     while True:
@@ -74,17 +87,15 @@ def main():
     # Statuts : totaux seulement.
     statuts = {}
     for rec in records:
-        v = rec["fields"].get("Statut") or "(vide)"
-        if isinstance(v, list):
-            v = ", ".join(v) or "(vide)"
-        statuts[str(v)] = statuts.get(str(v), 0) + 1
+        v = statut(rec["fields"]) or "(vide)"
+        statuts[v] = statuts.get(v, 0) + 1
 
     pages = {p.stem for p in pathlib.Path("artistes").glob("*.html")}
 
     valides, sans_nom = [], 0
     for rec in records:
         f = rec["fields"]
-        if f.get("Statut") != "Validé":
+        if not est_valide(f):
             continue
         nom = (f.get("Nom artiste") or "").strip()
         if nom:
@@ -100,7 +111,7 @@ def main():
     soucis = []
     for rec in records:
         f = rec["fields"]
-        if f.get("Statut") != "Validé":
+        if not est_valide(f):
             continue
         nom = (f.get("Nom artiste") or "?").strip() or "?"
         for champ in CHAMPS_URL:
