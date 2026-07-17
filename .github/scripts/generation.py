@@ -164,7 +164,15 @@ def maj_bio(t, bio):
                   lambda m: m.group(1) + corps + m.group(3), t, count=1, flags=re.S)
 
 
+def aplatir(s):
+    """Un attribut HTML ne peut pas contenir de retour à la ligne, or la
+    miniphrase est un champ multiligne. Webflow joignait les lignes par des
+    virgules (« Rappeur, Chanteur Afro, Interprète ») : on fait pareil."""
+    return ", ".join(l.strip() for l in (s or "").splitlines() if l.strip())
+
+
 def maj_metas(t, nom, mini):
+    nom, mini = aplatir(nom), aplatir(mini)
     # [^"]* et non .*? : le document tient sur une seule ligne, et une capture
     # permissive traverse les guillemets pour avaler les balises voisines.
     for motif, val in [
