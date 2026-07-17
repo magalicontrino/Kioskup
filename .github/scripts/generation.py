@@ -9,6 +9,7 @@ Seuls les champs connus de la base sont réécrits. Le reste n'est pas touché.
 
 Simulation par défaut : il faut ECRIRE=oui pour modifier les fichiers.
 """
+import difflib
 import html
 import json
 import os
@@ -216,7 +217,7 @@ def main():
     except urllib.error.HTTPError as e:
         echouer(f"Airtable a répondu {e.code}\n{e.read().decode('utf-8', 'replace')[:600]}")
 
-    modifiees, inchangees, sans_page = [], [], []
+    modifiees, inchangees, sans_page, apercus = [], [], [], []
     for rec in records:
         f = rec["fields"]
         if not est_valide(f):
@@ -234,6 +235,12 @@ def main():
             inchangees.append(s)
         else:
             modifiees.append(s)
+            if len(apercus) < 3:
+                fa = re.sub(r">\s*<", ">\n<", avant).split("\n")
+                fb = re.sub(r">\s*<", ">\n<", apres).split("\n")
+                d = [x[:160] for x in difflib.unified_diff(fa, fb, lineterm="", n=0)
+                     if x[:1] in "+-" and not x.startswith(("---", "+++"))]
+                apercus.append((s, d[:14]))
             if ECRIRE:
                 page.write_text(apres, encoding="utf-8")
 
@@ -246,6 +253,14 @@ def main():
         L += ["", f"## Validés sans page : {len(sans_page)}", "",
               "Une fiche neuve reste à créer pour eux — non couvert à ce stade.", ""]
         L += [f"- {n} → `{s}`" for n, s in sans_page]
+    # Un compte ne dit pas ce qui change. Avant de réécrire 70 pages d'un site
+    # en production, il faut pouvoir lire les différences.
+    if apercus:
+        L += ["", "## Aperçu des différences", "",
+              "Extrait de trois fiches, pour juger sur pièces.", ""]
+        for s, lignes in apercus:
+            L += [f"### `{s}.html`", "", "```diff"] + lignes + ["```", ""]
+
     if modifiees:
         L += ["", "## Fiches modifiées", ""] + [f"- `{s}.html`" for s in sorted(modifiees)]
     if not ECRIRE:
