@@ -121,6 +121,20 @@
               "nom": "commentaires perso",
               "type": "multilineText",
               "choix": null
+            },
+            {
+              "nom": "Slug",
+              "type": "singleLineText",
+              "choix": null
+            },
+            {
+              "nom": "Statut",
+              "type": "multipleSelects",
+              "choix": [
+                "À vérifier",
+                "Validé",
+                "Refusé"
+              ]
             }
           ]
         }
