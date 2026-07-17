@@ -55,8 +55,16 @@ def statut(fields):
     return (v or "").strip()
 
 
+def sans_accent(s):
+    """« Validé » peut arriver en Unicode composé (é) ou décomposé (e + accent) :
+    visuellement identiques, mais différents à la comparaison. On compare donc
+    des formes dépouillées."""
+    s = unicodedata.normalize("NFKD", s or "")
+    return "".join(c for c in s if not unicodedata.combining(c)).strip().lower()
+
+
 def est_valide(fields):
-    return statut(fields).lower() == "validé"
+    return sans_accent(statut(fields)) == "valide"
 
 
 def lire_base(token):
@@ -130,6 +138,18 @@ def main():
     L += ["", "## Statuts (totaux)", ""]
     for k, v in sorted(statuts.items(), key=lambda x: -x[1]):
         L.append(f"- {k} : **{v}**")
+
+    # Forme brute des valeurs : deux chaînes peuvent s'afficher pareil et différer
+    # (accent composé ou non, espace en trop). Sans ça, un filtre qui ne retient
+    # rien reste inexplicable.
+    if not valides and records:
+        brut = {repr(rec["fields"].get("Statut")) for rec in records}
+        L += ["", "### Diagnostic", "",
+              "Aucune entrée validée alors que la base en compte. Valeurs brutes :", ""]
+        for b in sorted(brut):
+            L.append(f"- `{b}`")
+        champs = sorted({c for rec in records for c in rec["fields"]})
+        L += ["", "Champs réellement présents :", "", "```", ", ".join(champs), "```"]
     if sans_nom:
         L += ["", f"⚠️ **{sans_nom}** entrée(s) validée(s) sans « Nom artiste » : "
               "aucune fiche ne peut être générée pour elles."]
