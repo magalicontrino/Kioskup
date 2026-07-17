@@ -194,7 +194,10 @@ def appliquer(page: pathlib.Path, f: dict):
 
     nom = champ(f, "Nom artiste")
     genre = champ(f, "Genre")
-    mini = champ(f, MINIPHRASE) or champ(f, "miniphrase de présentation")
+    # La miniphrase est un champ multiligne, mais elle s'affiche sur une seule
+    # ligne : Webflow joignait les lignes par des virgules, ici comme dans les
+    # métas.
+    mini = aplatir(champ(f, MINIPHRASE) or champ(f, "miniphrase de présentation"))
     source = champ(f, "source couverture")
     bio = champ(f, "bio")
 
