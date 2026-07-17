@@ -1,1 +1,6 @@
 .DS_Store
+
+# Extraction destinée à l'import Airtable : agrège les e-mails des artistes.
+# Publiés un par un sur le site, mais rassemblés ici ils forment une liste
+# directement exploitable par les collecteurs de spam. Reste en local.
+artistes-extraits.csv
