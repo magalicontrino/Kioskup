@@ -1,0 +1,43 @@
+# Met à jour les fiches artistes depuis Airtable.
+#
+# Simulation par défaut. L'écriture exige un déclenchement manuel explicite :
+# un push ne peut pas modifier le site par inadvertance.
+name: Générer les fiches
+
+on:
+  workflow_dispatch:
+    inputs:
+      ecrire:
+        description: 'Modifier réellement les fiches ? ("oui" pour appliquer)'
+        required: true
+        default: "non"
+  push:
+    paths:
+      - .github/workflows/generation.yml
+      - .github/scripts/generation.py
+
+permissions:
+  contents: write
+
+jobs:
+  generer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Générer
+        env:
+          # Lecture seule : la génération n'écrit jamais dans Airtable.
+          AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN }}
+          ECRIRE: ${{ github.event_name == 'workflow_dispatch' && inputs.ecrire || 'non' }}
+        run: python3 .github/scripts/generation.py
+
+      - name: Publier
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase --autostash -q || true
+          git add -A artistes rapport-generation.md || true
+          git diff --staged --quiet || git commit -m "Mettre à jour les fiches artistes depuis Airtable"
+          git push || true
