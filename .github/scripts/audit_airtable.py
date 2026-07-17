@@ -23,6 +23,7 @@ BASE = "appUbHPkquG7bXSxJ"
 TABLE = "tblvRWQHFtKwcfcpn"
 RAPPORT = pathlib.Path("rapport-artistes.md")
 
+# Champs susceptibles de contenir un lien saisi à la main.
 CHAMPS_URL = [
     "web", "instagram", "Tik Tok", "youtube", "spotify",
     "Linkedin", "facebook", "soundcloud", "video youtube ou autre",
